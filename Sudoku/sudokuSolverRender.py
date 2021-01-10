@@ -1,6 +1,9 @@
 import pygame as pg
 import time
 
+# Will solve the given sudoku and draw the process using pygame
+# This significantly reduces the speed of the algorithm
+
 def checkValue(sudoku, value, x, y):
     lstx = []
     lsty = []
