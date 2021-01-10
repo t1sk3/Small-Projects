@@ -16,7 +16,6 @@ def getNumber(filename):
 def main():
     for filename in os.listdir(filepath):
         if filename[-3:] == '.py' and filename[:5] == "euler":
-            #print(filename) 
             number = getNumber(filename)
             rest = 3 - len(number)
             newName = "euler"
