@@ -14,7 +14,7 @@ def getNumber(filename):
     return number
 
 def main():
-    for filename in os.listdir("C:\\Users\\matti\\Documents\\Python\\Projects\\euler\\euler\\Python"):
+    for filename in os.listdir(filepath):
         if filename[-3:] == '.py' and filename[:5] == "euler":
             #print(filename) 
             number = getNumber(filename)
@@ -23,8 +23,8 @@ def main():
             for i in range(rest):
                 newName += "0"
             newName += number + ".py"
-            src ='C:\\Users\\matti\\Documents\\Python\\Projects\\euler\\euler\\Python\\'+ filename 
-            dst ='C:\\Users\\matti\\Documents\\Python\\Projects\\euler\\euler\\Python\\'+ newName
+            src = filepath+ filename 
+            dst = filepath+ newName
 
             os.rename(src, dst)
 
