@@ -1,7 +1,6 @@
 import socket
 import threading
 
-#host = '192.168.68.117'
 host = '127.0.0.1'
 port = 55555
 
