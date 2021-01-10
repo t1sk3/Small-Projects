@@ -1,7 +1,5 @@
 import os
 
-#os.rename(src, dst)
-
 def getNumber(filename):
     counter = 5
     number = ''
