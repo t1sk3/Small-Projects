@@ -1,6 +1,7 @@
 import os
 
 # filepath should be changed to the path of the directory of all the files that need to be changed
+# I used this to rename files from 'name1.py' to 'name001.py'
 
 def getNumber(filename):
     counter = 5
