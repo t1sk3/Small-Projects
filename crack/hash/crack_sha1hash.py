@@ -7,7 +7,7 @@ def inp():
 
     wordlist = input("File name (leave empty to use the default dictionary): ")
     if wordlist == "":
-        wordlist = "C:\\Users\\matti\\Documents\\Python\\Projects\\crack\\pass_list.txt"
+        wordlist = filepath
     
     return pass_hash, wordlist
 
