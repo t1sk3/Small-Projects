@@ -90,20 +90,6 @@ def solveSudoku(sudoku):
                 pg.display.flip()
                 continue
 
-def button(msg,a,b,c,d,ic,ac,action=None):
-    mouse = pg.mouse.get_pos()
-    click = pg.mouse.get_pressed()
-    if a+c > mouse[0] > a and b+d > mouse[1] > b:
-        pg.draw.rect(screen, ac, (a,b,c,d))
-        if click[0] == 1 and action != None:
-            action()
-    else:
-        pg.draw.rect(screen, ic, (a,b,c,d))
-    smallText = pg.font.SysFont("calibri",20)
-    textSurface, textRect = text_objects(msg, smallText, WHITE)
-    textRect.center = (round(a+(c/2)), round(b+(d/2)))
-    screen.blit(textSurface, textRect)
-
 def drawLines():
     x = 75
     y = 50
