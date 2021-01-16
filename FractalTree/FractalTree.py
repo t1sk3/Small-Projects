@@ -33,12 +33,14 @@ def main():
     y2 = 800
     # The angle towards the y axis (changing this without changing the coordinates will change the tree)
     angle = 180
-    # Angle of the next branches, as well as the fraction of its length
-    ANGLE = 30
-    FRACTION = 1.85
+    # Angle of the next branches compared to the parenting branch
+    ANGLE = 20
+    # Fraction of the length of the child branch compared to the parenting branch
+    FRACTION = 1.7
     
     pg.init()
 
+    #defining the screen
     xmax = 1200
     ymax = 1200
 
@@ -46,7 +48,7 @@ def main():
     BLACK = (0, 0, 0)
 
     screen = pg.display.set_mode((xmax,ymax))
-    pg.display.set_caption("Split Tree")
+    pg.display.set_caption("Fractal Tree")
     screen.fill(WHITE)
 
     pg.display.flip()
