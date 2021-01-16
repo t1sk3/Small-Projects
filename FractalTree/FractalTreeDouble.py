@@ -22,7 +22,11 @@ class branch:
         yl = self.y2 + cos(radians(self.angle + ANGLE))*self.length/FRACTION
         xr = self.x2 + sin(radians(self.angle - ANGLE))*self.length/FRACTION
         yr = self.y2 + cos(radians(self.angle - ANGLE))*self.length/FRACTION
-        return [branch(self.x2, self.y2, xl, yl, self.angle + ANGLE), branch(self.x2, self.y2, xr, yr, self.angle - ANGLE)]
+        xl2 = self.x2 + sin(radians(self.angle + ANGLE*2))*self.length/FRACTION
+        yl2 = self.y2 + cos(radians(self.angle + ANGLE*2))*self.length/FRACTION
+        xr2 = self.x2 + sin(radians(self.angle - ANGLE*2))*self.length/FRACTION
+        yr2 = self.y2 + cos(radians(self.angle - ANGLE*2))*self.length/FRACTION
+        return [branch(self.x2, self.y2, xl, yl, self.angle + ANGLE), branch(self.x2, self.y2, xr, yr, self.angle - ANGLE), branch(self.x2, self.y2, xl2, yl2, self.angle + ANGLE*2), branch(self.x2, self.y2, xr2, yr2, self.angle - ANGLE*2)]
 
 def main():
     global screen, BLACK, WHITE, ANGLE, FRACTION
@@ -36,7 +40,7 @@ def main():
     # The angle towards the y axis (this spins the tree around the end point of the first branch)(180 is default)
     angle = 180
     # Angle of the next branches compared to the parenting branch
-    ANGLE = 15
+    ANGLE = 30
     # Fraction of the length of the child branch compared to the parenting branch
     FRACTION = 1.7
     
@@ -68,6 +72,8 @@ def main():
             new = br.create()
             new1.append(new[0])
             new1.append(new[1])
+            new1.append(new[2])
+            new1.append(new[3])
             #time.sleep(0.01)
         for br2 in new1:
             lst.append(br2)
