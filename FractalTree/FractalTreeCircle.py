@@ -26,17 +26,34 @@ class branch:
         yl2 = self.y2 + cos(radians(self.angle + ANGLE*2))*self.length/FRACTION
         xr2 = self.x2 + sin(radians(self.angle - ANGLE*2))*self.length/FRACTION
         yr2 = self.y2 + cos(radians(self.angle - ANGLE*2))*self.length/FRACTION
-        return [branch(self.x2, self.y2, xl, yl, self.angle + ANGLE), branch(self.x2, self.y2, xr, yr, self.angle - ANGLE), branch(self.x2, self.y2, xl2, yl2, self.angle + ANGLE*2), branch(self.x2, self.y2, xr2, yr2, self.angle - ANGLE*2)]
+        xl3 = self.x2 + sin(radians(self.angle))*self.length/FRACTION
+        yl3 = self.y2 + cos(radians(self.angle))*self.length/FRACTION
+        xr3 = self.x2 + sin(radians(self.angle))*self.length/FRACTION
+        yr3 = self.y2 + cos(radians(self.angle))*self.length/FRACTION
+        xl4 = self.x2 + sin(radians(self.angle + 180))*self.length/FRACTION
+        yl4 = self.y2 + cos(radians(self.angle + 180))*self.length/FRACTION
+        xr4 = self.x2 + sin(radians(self.angle + 180))*self.length/FRACTION
+        yr4 = self.y2 + cos(radians(self.angle + 180))*self.length/FRACTION
+        return [
+            branch(self.x2, self.y2, xl, yl, self.angle + ANGLE), 
+            branch(self.x2, self.y2, xr, yr, self.angle - ANGLE), 
+            branch(self.x2, self.y2, xl2, yl2, self.angle + ANGLE*2), 
+            branch(self.x2, self.y2, xr2, yr2, self.angle - ANGLE*2),
+            branch(self.x2, self.y2, xr3, yr3, self.angle),
+            branch(self.x2, self.y2, xr3, yr3, self.angle),
+            branch(self.x2, self.y2, xr4, yr4, self.angle + 180),
+            branch(self.x2, self.y2, xr4, yr4, self.angle + 180)
+            ]
 
 def main():
     global screen, BLACK, WHITE, ANGLE, FRACTION
     # Starting variables
     # Starting coordinate of the first branch
     x1 = 600
-    y1 = 1200
+    y1 = 100
     # Ending coordinate of the first branch
     x2 = 600
-    y2 = 800
+    y2 = 600
     # The angle towards the y axis (this spins the tree around the end point of the first branch)(180 is default)
     angle = 180
     # Angle of the next branches compared to the parenting branch
@@ -60,7 +77,7 @@ def main():
     pg.display.flip()
 
     newBranch = branch(x1,y1,x2,y2,angle)
-    newBranch.draw()
+    #newBranch.draw()
     lst = newBranch.create()
     used = []
         
@@ -70,10 +87,8 @@ def main():
             br.draw()
             used.append(br)
             new = br.create()
-            new1.append(new[0])
-            new1.append(new[1])
-            new1.append(new[2])
-            new1.append(new[3])
+            for i in range(len(new) - 4): # -4 because otherwise it looks really boring
+                new1.append(new[i])
             #time.sleep(0.01)
         for br2 in new1:
             lst.append(br2)

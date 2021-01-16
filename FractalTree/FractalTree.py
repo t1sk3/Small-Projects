@@ -36,7 +36,7 @@ def main():
     # The angle towards the y axis (this spins the tree around the end point of the first branch)(180 is default)
     angle = 180
     # Angle of the next branches compared to the parenting branch
-    ANGLE = 15
+    ANGLE = 30
     # Fraction of the length of the child branch compared to the parenting branch
     FRACTION = 1.7
     
