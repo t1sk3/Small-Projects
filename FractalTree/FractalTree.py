@@ -16,11 +16,11 @@ class branch:
         pg.display.flip()
     
     def create(self):
-        xl = self.x2 - cos(radians(self.angle - (ANGLE - 90)))*self.length/FRACTION
-        yl = self.y2 - sin(radians(self.angle - (ANGLE - 90)))*self.length/FRACTION
-        xr = self.x2 + cos(radians(self.angle + (ANGLE - 90)))*self.length/FRACTION
-        yr = self.y2 + sin(radians(self.angle + (ANGLE - 90)))*self.length/FRACTION
-        return [branch(self.x2, self.y2, xl, yl, self.angle + (ANGLE - 90)), branch(self.x2, self.y2, xr, yr, self.angle - (ANGLE - 90))]
+        xl = self.x2 + sin(radians(self.angle + (ANGLE)))*self.length/FRACTION
+        yl = self.y2 + cos(radians(self.angle + (ANGLE)))*self.length/FRACTION
+        xr = self.x2 + sin(radians(self.angle - (ANGLE)))*self.length/FRACTION
+        yr = self.y2 + cos(radians(self.angle - (ANGLE)))*self.length/FRACTION
+        return [branch(self.x2, self.y2, xl, yl, self.angle + (ANGLE)), branch(self.x2, self.y2, xr, yr, self.angle - (ANGLE))]
 
 def main():
     global screen, BLACK, WHITE, ANGLE, FRACTION
@@ -30,12 +30,12 @@ def main():
     y1 = 1200
     # Ending coordinate of the first branch
     x2 = 600
-    y2 = 600
+    y2 = 800
     # The angle towards the y axis (changing this without changing the coordinates will change the tree)
-    angle = 0
+    angle = 180
     # Angle of the next branches, as well as the fraction of its length
-    ANGLE = 45
-    FRACTION = 2
+    ANGLE = 30
+    FRACTION = 1.85
     
     pg.init()
 
