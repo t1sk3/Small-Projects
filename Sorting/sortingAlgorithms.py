@@ -1,3 +1,5 @@
+import random
+
 def sortLst(lst):
     res = []
     while True:
@@ -55,8 +57,23 @@ def bubble_sort(lst):
                 lst[j], lst[j + 1] = lst[j + 1], lst[j]
     return lst
 
+def quickSort(lst):
+    if len(lst) == 0:
+        return lst
+    spil = random.choice(lst)
+    count = lst.count(spil)
+    l = []
+    r = []
+    for i in lst:
+        if i > spil:
+            r.append(i)
+        elif i < spil:
+            l.append(i)
+    return quickSort(l) + [spil] * count + quickSort(r)
+
 if __name__ == "__main__":
     print(sortLst([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]))
     print(sortLstRecur([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]))
     print(bubble_sort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]))
+    print(quickSort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]))
     print(sorted([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]))
