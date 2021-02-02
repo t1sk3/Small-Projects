@@ -1,4 +1,5 @@
 import time
+import random
 
 def sortLst(lst):
     res = []
@@ -71,6 +72,12 @@ def quickSort(lst):
             l.append(i)
     return quickSort(l) + [spil] * count + quickSort(r)
 
+def shotgun_sort(lst):
+    res = []
+    while res != sorted(lst):
+        res = random.shuffle(lst)
+    return res
+
 if __name__ == "__main__":
     now = time.time()
     print(sortLst([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
@@ -80,5 +87,7 @@ if __name__ == "__main__":
     print(bubble_sort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
     now = time.time()
     print(quickSort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
+    now = time.time()
+    print(shotgun_sort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
     now = time.time()
     print(sorted([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
