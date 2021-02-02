@@ -73,7 +73,9 @@ def quickSort(lst):
     return quickSort(l) + [spil] * count + quickSort(r)
 
 def shotgun_sort(lst):
-    res = lst
+    res = []
+    for num in lst:
+        res.append(num)
     while res != sorted(lst):
         random.shuffle(res)
     return res
