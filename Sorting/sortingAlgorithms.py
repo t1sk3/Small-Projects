@@ -81,7 +81,7 @@ def shotgun_sort(lst):
     return res
 
 if __name__ == "__main__":
-    LIMIT = 10000
+    LIMIT = 400
     base = []
     lst = []
 
@@ -94,20 +94,9 @@ if __name__ == "__main__":
 
     backup = list(lst)
 
-    now = time.time()
-    print(sortLst(lst), "sortLst:", time.time() - now)
-    lst = list(backup)
-    now = time.time()
-    print(sortLstRecur(lst), "Recur:", time.time() - now)
-    lst = list(backup)
-    now = time.time()
-    print(bubble_sort(lst), "bubble:", time.time() - now)
-    lst = list(backup)
-    now = time.time()
-    print(quickSort(lst), "quickSort:", time.time() - now)
-    lst = list(backup)
-    now = time.time()
-    #print(shotgun_sort(lst), "shotgun_sort", time.time() - now)
-    lst = list(backup)
-    now = time.time()
-    print(sorted(lst), "sorted():", time.time() - now)
+    sorting_funcs = [sortLst, sortLstRecur, bubble_sort, quickSort, sorted]
+
+    for sorting_func in sorting_funcs:
+        now = time.time()
+        print(sorting_func(lst), sorting_func.__name__, ":", time.time() - now)
+        lst = list(backup)
