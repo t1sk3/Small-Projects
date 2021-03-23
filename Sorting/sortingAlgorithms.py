@@ -81,15 +81,33 @@ def shotgun_sort(lst):
     return res
 
 if __name__ == "__main__":
+    LIMIT = 10000
+    base = []
+    lst = []
+
+    for i in range(LIMIT):
+        base.append(i+1)
+    for i in range(LIMIT):
+        num = random.choice(base)
+        base.remove(num)
+        lst.append(num)
+
+    backup = list(lst)
+
     now = time.time()
-    print(sortLst([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
+    print(sortLst(lst), "sortLst:", time.time() - now)
+    lst = list(backup)
     now = time.time()
-    print(sortLstRecur([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
+    print(sortLstRecur(lst), "Recur:", time.time() - now)
+    lst = list(backup)
     now = time.time()
-    print(bubble_sort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
+    print(bubble_sort(lst), "bubble:", time.time() - now)
+    lst = list(backup)
     now = time.time()
-    print(quickSort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
+    print(quickSort(lst), "quickSort:", time.time() - now)
+    lst = list(backup)
     now = time.time()
-    print(shotgun_sort([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
+    #print(shotgun_sort(lst), "shotgun_sort", time.time() - now)
+    lst = list(backup)
     now = time.time()
-    print(sorted([7,4,3,7,2,1,8,9,3,3,7,3,7,32,3,7645,6,78,3,24,7,7,34,75,875,68,4679,237,8,764,8,3586,86]), time.time() - now)
+    print(sorted(lst), "sorted():", time.time() - now)
