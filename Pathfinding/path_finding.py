@@ -1,4 +1,5 @@
 import pygame as pg
+import time
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -18,7 +19,6 @@ class Spot:
         self.is_end = False
         self.is_path = False
         self.is_barrier = False
-        self.length = -1
         self.color = WHITE
         self.x = x
         self.y = y
@@ -51,13 +51,13 @@ class Spot:
         self.is_path = False
         self.is_barrier = False
         self.color = WHITE
+        self.draw()
     
     def draw(self):
         pg.draw.rect(screen, self.color, (self.x*self.width + 1, self.y*self.width + 1, self.width-2, self.width-2))
         pg.display.flip()
     
-    def check(self, l):
-        self.length = l
+    def check(self):
         self.checked = True
         self.is_last = True
         self.color = ORANGE
@@ -69,9 +69,9 @@ class Spot:
     def get_path(self):
         return self.path
 
-XPIX = 50
-YPIX = 50
-WIDTH = 15
+XPIX = 100
+YPIX = 100
+WIDTH = 7
 
 pg.init()
 
@@ -84,9 +84,9 @@ screen.fill(BLACK)
 clock = pg.time.Clock()
 
 board = []
-for i in range(50):
+for i in range(YPIX):
     line = []
-    for j in range(50):
+    for j in range(XPIX):
         next_spot = Spot(j, i, WIDTH)
         next_spot.draw()
         line.append(next_spot)
@@ -98,6 +98,8 @@ start = False
 end = False
 barriers = False
 breaking = False
+start_count = 0
+end_count = 0
 while searching:
     for event in pg.event.get():
         if breaking:
@@ -108,26 +110,70 @@ while searching:
     if setting_up:
         if pg.mouse.get_pressed()[0]:
             pos = pg.mouse.get_pos()
-            x = pos[0]//15
-            y = pos[1]//15
+            x = pos[0]//WIDTH
+            y = pos[1]//WIDTH
         
             if not start:
-                board[y][x].make_start()
-                board[y][x].draw()
-                board[y][x].is_last = True
-                start = True
+                if start_count == 0:
+                    board[y][x].make_start()
+                    board[y][x].draw()
+                    board[y][x].is_last = True
+                    start_count = 1
+                elif start_count == 1:
+                    found = False
+                    for line in board:
+                        for s in line:
+                            if s.is_start:
+                                s.reset()
+                                found = True
+                                break
+                        if found:
+                            break
+                    board[y][x].make_start()
+                    board[y][x].draw()
+                    board[y][x].is_last = True
+                start_count = 1
             elif not end and not board[y][x].is_start:
-                board[y][x].make_end()
-                board[y][x].draw()
-                end = True
+                if end_count == 0:
+                    board[y][x].make_end()
+                    board[y][x].draw()
+                    end_count = 1
+                elif end_count == 1:
+                    found = False
+                    for line in board:
+                        for s in line:
+                            if s.is_end:
+                                s.reset()
+                                found = True
+                                break
+                        if found:
+                            break
+                    board[y][x].make_end()
+                    board[y][x].draw()
             elif not barriers and not board[y][x].is_start and not board[y][x].is_end:
                 board[y][x].make_barrier()
                 board[y][x].draw()
+        elif pg.mouse.get_pressed()[2]:
+            pos = pg.mouse.get_pos()
+            x = pos[0]//WIDTH
+            y = pos[1]//WIDTH
+
+            if not barriers and not board[y][x].is_start and not board[y][x].is_end:
+                board[y][x].reset()
+
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_RETURN:
-                barriers = True
-                if start and end and barriers:
-                    setting_up = False
+                if not start:
+                    start = True
+                    time.sleep(0.1)
+                else:
+                    if not end:
+                        end = True
+                        time.sleep(0.1)
+                    else:
+                        if not barriers:
+                            barriers = True
+                            setting_up = False
     else:
         for line in board:
             if breaking:
@@ -141,10 +187,10 @@ while searching:
                     s.is_last = False
                     s.color = GREY
                     s.draw()
-                    if not x+1 > 49:
+                    if not x+1 > XPIX-1:
                         new = board[y][x+1]
                         if not new.checked and not new.is_barrier:
-                            new.check(s.length+1)
+                            new.check()
                             new.draw()
                             new.make_path(list(s.get_path()))
                         if new.is_end:
@@ -154,17 +200,17 @@ while searching:
                     if not x-1 < 0:
                         new = board[y][x-1]
                         if not new.checked and not new.is_barrier:
-                            new.check(s.length+1)
+                            new.check()
                             new.draw()
                             new.make_path(list(s.get_path()))
                         if new.is_end:
                             searching = False
                             breaking = True
                             break
-                    if not y+1 > 49:
+                    if not y+1 > YPIX-1:
                         new = board[y+1][x]
                         if not new.checked and not new.is_barrier:
-                            new.check(s.length+1)
+                            new.check()
                             new.draw()
                             new.make_path(list(s.get_path()))
                         if new.is_end:
@@ -174,7 +220,7 @@ while searching:
                     if not y-1 < 0:
                         new = board[y-1][x]
                         if not new.checked and not new.is_barrier:
-                            new.check(s.length+1)
+                            new.check()
                             new.draw()
                             new.make_path(list(s.get_path()))
                         if new.is_end:
