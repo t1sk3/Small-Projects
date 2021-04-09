@@ -12,7 +12,7 @@ GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
 
 class Spot:
-    def __init__(self, x, y):
+    def __init__(self, x, y, width):
         self.checked = False
         self.is_start = False
         self.is_end = False
@@ -22,6 +22,7 @@ class Spot:
         self.color = WHITE
         self.x = x
         self.y = y
+        self.width = width
         self.is_last = False
         self.path = []
     
@@ -52,7 +53,7 @@ class Spot:
         self.color = WHITE
     
     def draw(self):
-        pg.draw.rect(screen, self.color, (self.x*15 + 1, self.y*15 + 1, 15-2, 15-2))
+        pg.draw.rect(screen, self.color, (self.x*self.width + 1, self.y*self.width + 1, self.width-2, self.width-2))
         pg.display.flip()
     
     def check(self, l):
@@ -70,11 +71,12 @@ class Spot:
 
 XPIX = 50
 YPIX = 50
+WIDTH = 15
 
 pg.init()
 
-xmax = XPIX*15
-ymax = YPIX*15
+xmax = XPIX*WIDTH
+ymax = YPIX*WIDTH
 
 screen = pg.display.set_mode((xmax,ymax))
 pg.display.set_caption("Pathfinding")
@@ -85,7 +87,7 @@ board = []
 for i in range(50):
     line = []
     for j in range(50):
-        next_spot = Spot(j,i)
+        next_spot = Spot(j, i, WIDTH)
         next_spot.draw()
         line.append(next_spot)
     board.append(line)
@@ -204,7 +206,3 @@ while True:
         if event.type == pg.QUIT:
             pg.quit
     clock.tick(150)
-
-
-                    
-
