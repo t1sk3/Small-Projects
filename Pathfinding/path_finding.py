@@ -1,7 +1,4 @@
 import pygame as pg
-import numpy as np
-import time
-import random
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
