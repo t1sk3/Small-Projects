@@ -69,9 +69,9 @@ class Spot:
     def get_path(self):
         return self.path
 
-XPIX = 100
-YPIX = 100
-WIDTH = 7
+XPIX = 100 # how many boxes in de x direction
+YPIX = 100 # how many boxes in the y direction
+WIDTH = 7  # width of 1 box in pixels
 
 pg.init()
 
@@ -227,6 +227,48 @@ while searching:
                             searching = False
                             breaking = True
                             break
+                    '''
+                    if not y-1 < 0 and not x-1 < 0:
+                        new = board[y-1][x-1]
+                        if not new.checked and not new.is_barrier:      # these lines are commented out,
+                            new.check()                                 # they are used to add the functionality
+                            new.draw()                                  # of diagonal steps to the algorithm
+                            new.make_path(list(s.get_path()))
+                        if new.is_end:
+                            searching = False
+                            breaking = True
+                            break
+                    if not y+1 > YPIX-1 and not x+1 > XPIX-1:
+                        new = board[y+1][x+1]
+                        if not new.checked and not new.is_barrier:
+                            new.check()
+                            new.draw()
+                            new.make_path(list(s.get_path()))
+                        if new.is_end:
+                            searching = False
+                            breaking = True
+                            break
+                    if not y-1 < 0 and not x+1 > XPIX-1:
+                        new = board[y-1][x+1]
+                        if not new.checked and not new.is_barrier:
+                            new.check()
+                            new.draw()
+                            new.make_path(list(s.get_path()))
+                        if new.is_end:
+                            searching = False
+                            breaking = True
+                            break
+                    if not y+1 > YPIX-1 and not x-1 < 0:
+                        new = board[y+1][x-1]
+                        if not new.checked and not new.is_barrier:
+                            new.check()
+                            new.draw()
+                            new.make_path(list(s.get_path()))
+                        if new.is_end:
+                            searching = False
+                            breaking = True
+                            break
+                    '''
 
     clock.tick(150)
             
