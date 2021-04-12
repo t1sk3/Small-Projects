@@ -37,10 +37,6 @@ class Spot:
     def make_checked(self):
         self.checked = True
     
-    def make_path(self):
-        self.is_path = True
-        self.color = TURQUOISE
-    
     def make_barrier(self):
         self.is_barrier = True
         self.color = BLACK
@@ -69,9 +65,9 @@ class Spot:
     def get_path(self):
         return self.path
 
-XPIX = 100 # how many boxes in de x direction
-YPIX = 100 # how many boxes in the y direction
-WIDTH = 7  # width of 1 box in pixels
+XPIX = 50 # how many boxes in de x direction
+YPIX = 50 # how many boxes in the y direction
+WIDTH = 15  # width of 1 box in pixels
 
 pg.init()
 
@@ -269,7 +265,6 @@ while searching:
                             breaking = True
                             break
                     '''
-
     clock.tick(150)
             
 making_path = True
