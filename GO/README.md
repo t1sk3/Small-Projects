@@ -1,2 +1,2 @@
-These are just some of the Python projects rewritten in GO.\n
+These are just some of the Python projects rewritten in GO./n
 For now...
