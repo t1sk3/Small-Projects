@@ -1,4 +1,4 @@
-import eulerlib, string
+import string
 
 def to_base(num, base):
     if base == 10:
@@ -39,5 +39,5 @@ def to_base(num, base):
 
 if __name__ == "__main__":
     for i in range(2,37):
-        print(i, to_base(36, i), eulerlib.etc.decimal_to_base(36,i))
+        print(i, to_base(36, i))
 
